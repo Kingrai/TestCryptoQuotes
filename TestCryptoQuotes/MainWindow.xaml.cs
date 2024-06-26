@@ -188,7 +188,7 @@ namespace TestCryptoQuotes
                     listInfoSymbols.Add(new InfoSymbolModel() { Exchange = exchange.Key, UpdateDT = DateTime.Now, LastPrice = 0, IsTraiding = false, IsConnect = true });
                 }
             }
-            catch(Exception ex) { MessageBox.Show(ex.Message); return false; }
+            catch(Exception ex) { MessageBox.Show($"Невозможно добавить клиента из-за отсутсвтия подключения к бирже"); return false; }
             return true;
         }
 
@@ -263,6 +263,17 @@ namespace TestCryptoQuotes
                 currentNameSymbol.Copy(selectedSymbol);
                 SubscriptionToMultipleExchanges(currentNameSymbol);
                 lbInfo.ItemsSource = listInfoSymbols;
+            }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            pingThread.Abort();
+            pingThread = null;
+
+            foreach (var exchange in dictExchange)
+            {
+                _ = stackExchange.UnsubscribeAsync(exchange.Key);
             }
         }
 

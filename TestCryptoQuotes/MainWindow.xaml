@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestCryptoQuotes" 
         mc:Ignorable="d"
-        Title="MultiTicker" Height="400" Width="420">
-        <!--ResizeMode="NoResize"-->
+        Title="MultiTicker" Height="400" Width="420" 
+        Closed="Window_Closed" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="ExchangeLabelStyle" TargetType="Label">
             <Setter Property="Content" Value="{Binding Exchange}"/>
